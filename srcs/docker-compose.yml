@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./requirements/nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - "443:80"
+
+
+
+# CMD echo -e "http {\n    server {\n        location /teste {\n            root /var/www;\n        }\n    }\n}\n" > /etc/nginx/nginx.conf
