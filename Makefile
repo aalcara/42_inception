@@ -6,7 +6,7 @@
 #    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/02/07 07:02:08 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/02/10 10:15:07 by aalcara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,6 @@ re: down up
 execbash:
 	docker exec -it nginx bash
 
-fclean:
+fclean: down
 	sudo mv ./hosts_bkp /etc/hosts
 	docker system prune -a
