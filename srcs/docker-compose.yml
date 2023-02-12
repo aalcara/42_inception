@@ -2,6 +2,8 @@ version: '3'
 
 services:
   nginx:
+    # depends_on:
+    #   - wordpress
     build: ./requirements/nginx
     image: nginx
     container_name: nginx
@@ -12,7 +14,17 @@ services:
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
       CERTS_: ${CERTS_}
+    volumes:
+      - wordpress:/var/www/wordpress
 
+  wordpress:
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+
+volumes:
+  wordpress:
+    external: true
 
 
 # CMD echo -e "http {\n    server {\n        location /teste {\n            root /var/www;\n        }\n    }\n}\n" > /etc/nginx/nginx.conf
