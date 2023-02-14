@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   nginx:
@@ -15,16 +15,29 @@ services:
       DOMAIN_NAME: ${DOMAIN_NAME}
       CERTS_: ${CERTS_}
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www/html
+    networks:
+      - network
 
   wordpress:
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress
+    env_file:
+      - .env
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOSTNAME: ${MYSQL_HOSTNAME}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - network
 
 volumes:
   wordpress:
-    external: true
 
-
-# CMD echo -e "http {\n    server {\n        location /teste {\n            root /var/www;\n        }\n    }\n}\n" > /etc/nginx/nginx.conf
+networks:
+  network:
+    driver: bridge

@@ -4,12 +4,14 @@ RUN apt-get update && apt-get install -y \
 		wget \
 		php7.3-fpm
 
-# RUN wget https://wordpress.org/latest.tar.gz
-# RUN tar xzf latest.tar.gz
-# RUN rm latest.tar.gz
-# RUN mv wordpress /var/www/html/
+# makes directory to php-fpm runs properly
+RUN mkdir -p /run/php
+
+# based on defalut fpm config file, only changed "listen" value
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
+
+COPY ./utils /utils
 
 EXPOSE 9000
 
-# CMD ["tail", "-f", "/dev/null"]
-CMD ["php-fpm7.3"]
+CMD ["bash", "./utils/wordpress_config.sh"]

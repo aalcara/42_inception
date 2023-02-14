@@ -6,7 +6,7 @@
 #    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/02/10 10:15:07 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/02/14 10:39:42 by aalcara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,20 +17,25 @@ all: build up
 build:
 	${SRC} && docker-compose build
 	cp /etc/hosts ./hosts_bkp
+	# TODO:corrigir o hosts
 	sudo rm /etc/hosts
 	sudo cp ./srcs/requirements/tools/hosts /etc/hosts
 
-up: build
+up:
 	${SRC} && docker-compose up
 
 down:
 	${SRC} && docker-compose down
 
-re: down up
+re: fclean build up
 
-execbash:
+# TODO: REMOVER
+bashnginx:
 	docker exec -it nginx bash
+# TODO: REMOVER
+bashwp:
+	docker exec -it wordpress bash
 
 fclean: down
 	sudo mv ./hosts_bkp /etc/hosts
-	docker system prune -a
+	docker system prune -a --volumes
