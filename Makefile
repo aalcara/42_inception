@@ -6,7 +6,7 @@
 #    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/02/14 10:39:42 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/03/07 07:29:46 by aalcara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,6 @@ down:
 	${SRC} && docker-compose down
 
 re: fclean build up
-
-# TODO: REMOVER
-bashnginx:
-	docker exec -it nginx bash
-# TODO: REMOVER
-bashwp:
-	docker exec -it wordpress bash
 
 fclean: down
 	sudo mv ./hosts_bkp /etc/hosts

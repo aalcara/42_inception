@@ -1,35 +1,48 @@
 version: "3"
 
 services:
-  nginx:
+  mariadb:
+    build: ./requirements/mariadb
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - network
+
+  wordpress:
     # depends_on:
-    #   - wordpress
-    build: ./requirements/nginx
-    image: nginx
-    container_name: nginx
-    ports:
-      - "443:443"
+    #   - mariadb
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    restart: always
     env_file:
       - .env
     environment:
-      DOMAIN_NAME: ${DOMAIN_NAME}
-      CERTS_: ${CERTS_}
+      - WORDPRESS_DB_HOST=${MYSQL_HOSTNAME}
+      - WORDPRESS_DB_USER=${MYSQL_USER}
+      - WORDPRESS_DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
     volumes:
       - wordpress:/var/www/html
     networks:
       - network
 
-  wordpress:
-    build: ./requirements/wordpress
-    image: wordpress
-    container_name: wordpress
+  nginx:
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    restart: always
     env_file:
       - .env
-    environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_HOSTNAME: ${MYSQL_HOSTNAME}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - wordpress:/var/www/html
     networks:
@@ -37,6 +50,7 @@ services:
 
 volumes:
   wordpress:
+  database:
 
 networks:
   network:
