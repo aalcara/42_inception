@@ -14,8 +14,8 @@ services:
       - network
 
   wordpress:
-    # depends_on:
-    #   - mariadb
+    depends_on:
+      - mariadb
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress
