@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - database:/var/lib/mysql
+      - database-data:/var/lib/mysql
     networks:
       - network
 
@@ -28,7 +28,7 @@ services:
       - WORDPRESS_DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
     volumes:
-      - wordpress:/var/www/html
+      - wordpress-data:/var/www/html
     networks:
       - network
 
@@ -44,13 +44,24 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress:/var/www/html
+      - wordpress-data:/var/www/html
     networks:
       - network
 
 volumes:
-  wordpress:
-  database:
+  wordpress-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/aalcara-/data/wordpress
+
+  database-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/aalcara-/data/database
 
 networks:
   network:

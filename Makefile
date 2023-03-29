@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/03/07 07:29:46 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/03/29 17:19:48 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ build:
 	# TODO:corrigir o hosts
 	sudo rm /etc/hosts
 	sudo cp ./srcs/requirements/tools/hosts /etc/hosts
+	sudo mkdir -p /home/aalcara-/data/database
+	sudo mkdir -p /home/aalcara-/data/wordpress
 
 up:
 	${SRC} && docker-compose up
