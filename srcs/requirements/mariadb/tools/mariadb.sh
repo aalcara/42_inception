@@ -41,4 +41,4 @@ fi
 
 /etc/init.d/mysql stop
 
-exec "$@"
+mysqld --bind-address=0.0.0.0
