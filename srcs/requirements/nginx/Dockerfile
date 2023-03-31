@@ -9,4 +9,6 @@ EXPOSE 443
 COPY ./conf/my.conf ./etc/nginx/conf.d/
 COPY ./tools/ ./etc/nginx/tools
 
-CMD ["bash", "/etc/nginx/tools/nginx.sh"];
+ENTRYPOINT [ "bash", "/etc/nginx/tools/nginx.sh" ];
+
+CMD [ "nginx", "-g", "daemon off;" ]

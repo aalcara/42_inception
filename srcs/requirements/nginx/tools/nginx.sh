@@ -12,6 +12,5 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 # echo $CERTS_
 sed -i "s|DOMAIN_NAME|${DOMAIN_NAME}|g" /etc/nginx/conf.d/my.conf
 sed -i "s|CERTS_|${CERTS_}|g" /etc/nginx/conf.d/my.conf
-# cat /etc/nginx/conf.d/my.conf
 
-nginx -g "daemon off;"
+exec "$@"
