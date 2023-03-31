@@ -24,4 +24,6 @@ COPY ./utils /utils
 
 EXPOSE 9000
 
-CMD ["bash", "./utils/wordpress_config.sh"]
+ENTRYPOINT ["bash", "./utils/wordpress_config.sh"]
+
+CMD ["php-fpm7.3", "-F"]

@@ -25,4 +25,4 @@ rm -fr wordpress
 
 fi
 
-php-fpm7.3 -F
+exec "$@"
