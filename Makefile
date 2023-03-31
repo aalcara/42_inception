@@ -6,7 +6,7 @@
 #    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/03/31 15:24:41 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/03/31 15:56:42 by aalcara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,14 @@ LOOKDOMAIN = $(shell grep "${DOMAIN}" /etc/hosts)
 
 all: hosts build up
 
+build: hosts
+	${SRC} && docker-compose build
+	sudo mkdir -p /home/aalcara-/data/database
+	sudo mkdir -p /home/aalcara-/data/wordpress
+
+up:
+	${SRC} && docker-compose up -d
+
 hosts:
 	@if [ "${DOMAIN}" = "${LOOKDOMAIN}" ]; then \
 		echo "Host already set"; \
@@ -24,14 +32,6 @@ hosts:
 		sudo rm /etc/hosts; \
 		sudo cp ./srcs/requirements/tools/hosts /etc/hosts; \
 	fi
-
-build: hosts
-	${SRC} && docker-compose build
-	sudo mkdir -p /home/aalcara-/data/database
-	sudo mkdir -p /home/aalcara-/data/wordpress
-
-up:
-	${SRC} && docker-compose up -d
 
 down:
 	${SRC} && docker-compose down
