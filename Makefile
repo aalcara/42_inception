@@ -6,7 +6,7 @@
 #    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/03/31 11:10:18 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/03/31 15:24:41 by aalcara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ hosts:
 	@if [ "${DOMAIN}" = "${LOOKDOMAIN}" ]; then \
 		echo "Host already set"; \
 	else \
-		echo "ELSE"; \
 		cp /etc/hosts ./hosts_bkp; \
 		sudo rm /etc/hosts; \
 		sudo cp ./srcs/requirements/tools/hosts /etc/hosts; \
