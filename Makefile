@@ -6,7 +6,7 @@
 #    By: aalcara- <aalcara-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 08:09:05 by aalcara-          #+#    #+#              #
-#    Updated: 2023/03/31 15:56:42 by aalcara-         ###   ########.fr        #
+#    Updated: 2023/04/01 17:03:27 by aalcara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,9 @@ hosts:
 down:
 	${SRC} && docker-compose down
 
-re: fclean build up
+re: fclean all
 
 fclean: down
 	sudo mv ./hosts_bkp /etc/hosts || echo "hosts_bkp does not exist"
 	docker system prune -a --volumes
-	# TODO: limpar volumes
+	sudo rm -fr /home/aalcara-/data
