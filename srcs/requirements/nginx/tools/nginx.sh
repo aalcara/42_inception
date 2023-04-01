@@ -8,8 +8,6 @@ openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-keyout $CERTS_/cert.key \
 	-subj "/C=BR/ST=Sao Paulo/L=Sao Paulo/O=42SP/OU=Inception/CN=aalcara/"
 
-# echo $DOMAIN_NAME
-# echo $CERTS_
 sed -i "s|DOMAIN_NAME|${DOMAIN_NAME}|g" /etc/nginx/conf.d/my.conf
 sed -i "s|CERTS_|${CERTS_}|g" /etc/nginx/conf.d/my.conf
 
